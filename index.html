@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <link rel="icon" type="image/png" href="media/icon.png">
+        <title>Notes</title>
+    </head>
+    <body>
+        <div id="welcome-screen">
+            <h1 id="welcome-head">Welcome to Your Notes</h1>
+            <p id="welcome-p">Hit space or click to continue...</p>
+        </div>
+        <div id="notes-container">
+            <div id="notes-sidebar">
+                <div id="sidebar-top">
+                    <h2 id="sidebar-head">Your Notes</h2>
+                    <div id="sidebar-buttons">
+                        <button id="new-note" onclick="newNote()"></button>
+                        <button id="delete-note"></button>
+                        <button id="hide-sidebar" onclick="hideSidebar()"></button>
+                    </div>
+                </div>
+            </div>
+            <div id="notes-page">
+                <div id="notes-top">
+                    <input id="note-title" type="text" placeholder="Title">
+                    <button id="save-button">Save</button>
+                </div>
+                <textarea id="notes-content" type="text" placeholder="Enter Text"></textarea>
+                <div id="note-welcome-group">
+                    <h3 id="notes-welcome">Welcome back</h3>
+                    <p id="notes-welcome-instruction">Click the plus to start a new note</p>
+                    <div id="clock">00:00</div>
+                </div>
+            </div>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>
