@@ -32,6 +32,7 @@ html, body {
     color: black;
     margin: 0;
     font-family: "clockFont";
+    margin-right: 15px;
 }
 
 #welcome-screen{
@@ -182,7 +183,7 @@ html, body {
     display: none;
     flex: 1;
     max-width: 100%;
-    width: 80%;
+    width: 100%;
     transition: width 0.5s ease, flex 1s ease;
 }
 
@@ -196,12 +197,13 @@ html, body {
 #note-title{
     max-height: 50%;
     background-color: transparent;
-    font-size: 40px;
+    font-size: 30px;
     color: white;
     border: none;
     margin-top: 20px;
     margin-left: 10px;
     outline: none;
+    font-family: "clockFont";
 }
 
 #notes-content{
