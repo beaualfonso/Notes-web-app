@@ -8,6 +8,14 @@
         <title>Notes</title>
     </head>
     <body>
+        <div id="header-container">
+            <div id="sidebar-buttons">
+                <button id="new-note" onclick="newNote()"></button>
+                <button id="delete-note"></button>
+                <button id="hide-sidebar" onclick="hideSidebar()"></button>
+            </div>
+            <header id="header">Red Panda Notes ʕ•ᴥ•ʔ</header>
+        </div>
         <div id="welcome-screen">
             <h1 id="welcome-head">Welcome to Your Notes</h1>
             <p id="welcome-p">Hit space or click to continue...</p>
@@ -16,11 +24,6 @@
             <div id="notes-sidebar">
                 <div id="sidebar-top">
                     <h2 id="sidebar-head">Your Notes</h2>
-                    <div id="sidebar-buttons">
-                        <button id="new-note" onclick="newNote()"></button>
-                        <button id="delete-note"></button>
-                        <button id="hide-sidebar" onclick="hideSidebar()"></button>
-                    </div>
                 </div>
             </div>
             <div id="notes-page">
@@ -30,7 +33,7 @@
                 </div>
                 <textarea id="notes-content" type="text" placeholder="Enter Text"></textarea>
                 <div id="note-welcome-group">
-                    <h3 id="notes-welcome">Welcome back</h3>
+                    <h3 id="notes-welcome">Welcome!</h3>
                     <p id="notes-welcome-instruction">Click the plus to start a new note</p>
                     <div id="clock">00:00</div>
                 </div>

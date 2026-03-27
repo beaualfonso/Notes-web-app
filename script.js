@@ -5,6 +5,7 @@ welcomeBox.classList.add("welcomeIdle");
 //start up
 let noteSidebar = document.getElementById("notes-sidebar");
 let notesPage = document.getElementById("notes-page");
+let headerContainer = document.getElementById("header-container");
 
 function startNotes(){
     welcomeBox.classList.remove("welcomeIdle");
@@ -12,6 +13,8 @@ function startNotes(){
     setTimeout(function(){
         noteSidebar.style.display = 'flex';
         notesPage.style.display = 'flex';
+        headerContainer.style.display = 'flex';
+        headerContainer.classList.add("headerIntro");
         noteSidebar.classList.add("noteSidebarIntro");
         notesPage.classList.add("notePageIntro");
     }, 100);
@@ -54,13 +57,34 @@ updateClock();
 setInterval(updateClock, 1000);
 
 //hide sidebar function
+
+let sidebarHidden = false;
+
 function hideSidebar(){
     noteSidebar.classList.remove("noteSidebarIntro");
-    noteSidebar.classList.add("sideBarOut");
-     notesPage.classList.add("notesPageExpand");
-    setTimeout(function(){
-        noteSidebar.style.display = "none";
-    }, 500);
+    if(!sidebarHidden)
+    {
+        noteSidebar.classList.remove("noteSidebarIn");
+        notesPage.classList.remove("notesPageShrink");
+
+        noteSidebar.classList.add("sideBarOut");
+        notesPage.classList.add("notesPageExpand");
+        setTimeout(function(){
+            noteSidebar.style.opacity = 0;
+        }, 500);
+        sidebarHidden = true;
+    }
+    else if(sidebarHidden)
+    {
+        notesPage.classList.remove("notesPageExpand");
+        noteSidebar.classList.remove("sideBarOut");
+        notesPage.classList.add("notesPageShrink");
+        setTimeout(function(){
+            noteSidebar.style.opacity = 1;
+            noteSidebar.classList.add("noteSidebarIn");
+        }, 100);
+        sidebarHidden = false;
+    }
 }
 
 let welcomeContainer = document.getElementById("note-welcome-group");

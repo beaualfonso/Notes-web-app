@@ -13,6 +13,27 @@ html, body {
     width: 100%;
 }
 
+#header-container{
+    background: rgba(255,255,255,0.5);
+    top: 0;
+    margin: 0;
+    max-width: 100%;
+    border-radius: 20px;
+    border: 1px solid white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 30px;
+    padding: 10px;
+    display: none;
+}
+
+#header{
+    color: black;
+    margin: 0;
+    font-family: "clockFont";
+}
+
 #welcome-screen{
     background: hsla(40, 35%, 53%, 1);
     background: linear-gradient(90deg,
@@ -77,7 +98,9 @@ html, body {
     border: 0.5px solid white;
     display: none;
     max-width: 20%;
-    transition: max-width 0.5s ease, padding 0.5s ease, opacity 0.5s ease;
+    width: 20%;
+    overflow: hidden;
+    transition: width 0.5s ease, padding 0.5s ease, opacity 0.5s ease;
 }
 
 #sidebar-top{
@@ -103,7 +126,7 @@ html, body {
 #sidebar-buttons{
     display: block;
     margin: 0 auto;
-    margin-left: 20px;
+    margin-left: 10px;
 }
 
 #new-note{
@@ -158,8 +181,9 @@ html, body {
     padding: 10px;
     display: none;
     flex: 1;
-    max-width: 80%;
-    transition: max-width 0.5s ease, flex 0.5s ease;
+    max-width: 100%;
+    width: 80%;
+    transition: width 0.5s ease, flex 1s ease;
 }
 
 #notes-top{
@@ -291,6 +315,11 @@ button:active{
     to {opacity: 0;}
 }
 
+@keyframes headerIntroAnim {
+    from {transform: translateX(-500px);}
+    to {transform: translateX(0px);}
+}
+
 .notePageIntro{
     animation: fadeFromRight 1s ease;
 }
@@ -300,7 +329,7 @@ button:active{
 }
 
 .welcomeIdle{
-    animation: welcomeAnimation 2s infinite steps(100);
+    animation: welcomeAnimation 4s infinite steps(100);
 }
 
 .welcomeFade{
@@ -308,16 +337,31 @@ button:active{
 }
 
 .sideBarOut{
-    max-width: 0% !important;
+    width: 0% !important;
     padding: 0 !important; 
     opacity: 0;
 }
 
 .notesPageExpand{
-    max-width: 100% !important;
+    width: 100% !important;
     flex: 1;
+}
+
+.notesPageShrink{
+    width: 80% !important;
+    flex: 1;
+}
+
+.noteSidebarIn{
+    width: 20% !important;
+    padding: 10px !important;
+    opacity: 1;
 }
 
 .noteTextAreaShow{
     animation: showContentAnim 0.5s ease forwards
+}
+
+.headerIntro{
+    animation: headerIntroAnim 1s ease forwards;
 }
