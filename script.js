@@ -1,3 +1,33 @@
+//local storage code
+
+let notes = JSON.parse(localStorage.getItem("userNote")) || [];
+function saveData(){
+    localStorage.setItem('userNote', JSON.stringify(notes));
+}
+
+function displayNote(note)
+{
+    var div = document.createElement("div");
+    var h = document.createElement("h1");
+    var button = document.createElement("button");
+
+    button.style.display = "none";
+    h.textContent = note.title;
+
+    div.appendChild(h);
+    div.appendChild(button);
+    document.getElementById("past-note").appendChild(div);
+}
+
+function loadData()
+{
+    notes.forEach(function(note){
+        displayNote(note);
+    })
+}
+
+loadData();
+
 //welcome screen
 let welcomeBox = document.getElementById("welcome-screen");
 let welcomeStatus = true;
@@ -48,7 +78,6 @@ function updateClock()
     const now = new Date();
     const hour = now.getHours().toString().padStart(2, 0);
     const min = now.getMinutes().toString().padStart(2, 0);
-    const sec = now.getSeconds().toString().padStart(2, 0);
     const timeString = `${hour}:${min}`;
     document.getElementById("clock").innerHTML = timeString;
 }
@@ -100,3 +129,66 @@ function newNote(){
     noteTop.classList.add("noteTextAreaShow");
     noteTextArea.classList.add("noteTextAreaShow");
 }
+
+// date
+function updateDate()
+{
+    const now = new Date();
+    const dayName = ["Sunday", "Monday", "Tuesday", "Wednesday",
+    "Thursday", "Friday", "Saturday"];
+    const day = now.getDay();
+    const date = now.getDate();
+    const month = now.getMonth()+1;
+    const year = now.getFullYear();
+    let dateString = `${month}/${date}/${year}`;
+    document.getElementById("day-of-week").textContent = dayName[day];
+    document.getElementById("date").textContent = dateString;
+}
+
+updateDate();
+
+//generating note id
+function newID(){
+   let id;
+   do{
+    Math.floor(1000 + Math.random() * 9000);
+   } while (notes.some(note => note.id === id));
+   return id;
+
+}
+
+//saving note
+let noteTitle = document.getElementById("note-title");
+let newNoteButton = document.getElementById("new-note");
+function saveNote()
+{
+    var div = document.createElement("div");
+    var h = document.createElement("h1");
+    var button = document.createElement("button");
+
+    button.style.display = "none";
+    h.textContent = noteTitle.value;
+
+    let userNote = {
+        id:newID(),
+        title: noteTitle.value,
+        content: noteTextArea.value
+    };
+
+    notes.push(userNote);
+    saveData();
+
+    div.classList.add("note-box");
+    h.classList.add("box-title");
+
+    div.appendChild(h);
+    div.appendChild(button);
+    document.getElementById("past-note").appendChild(div);
+
+    welcomeContainer.style.display = 'flex';
+    noteTop.style.display = 'none';
+    noteTextArea.style.display = 'none';
+    noteTitle.value = "";
+
+}
+
