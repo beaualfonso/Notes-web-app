@@ -394,6 +394,10 @@ button:active{
     animation: welcomeAnimation 4s infinite steps(100);
 }
 
+.deleteNote{
+    animation: welcomeAnimation 0.3s infinite steps(100);
+}
+
 .welcomeFade{
     animation: welcomeFadeAnim 2s ease-out forwards;
 }

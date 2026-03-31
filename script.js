@@ -5,18 +5,48 @@ function saveData(){
     localStorage.setItem('userNote', JSON.stringify(notes));
 }
 
+//delete note function
+let deleteValue = false;
+let deleteAni = false;
+
 function displayNote(note)
 {
     var div = document.createElement("div");
     var h = document.createElement("h1");
     var button = document.createElement("button");
 
+    div.dataset.noteId = note.id;
     button.style.display = "none";
     h.textContent = note.title;
+
+    div.classList.add("note-box");
+    h.classList.add("box-title");
+
+    div.addEventListener("click", function(){
+        if(deleteValue)
+        {
+            div.classList.add("deleteNote");
+            notes = notes.filter(function(n){
+                return n.id !== note.id;
+            });
+            saveData();
+            div.remove();
+        }
+        else
+        {
+            noteTitle.value = note.title;
+            noteTextArea.value = note.content;
+            noteTop.style.display = "flex";
+            noteTextArea.style.display = "flex";
+            welcomeContainer.style.display = "none";
+        }
+    });
 
     div.appendChild(h);
     div.appendChild(button);
     document.getElementById("past-note").appendChild(div);
+
+    return div;
 }
 
 function loadData()
@@ -26,7 +56,25 @@ function loadData()
     })
 }
 
-loadData();
+
+function deleteNote()
+{  
+    if(!deleteValue){
+        deleteValue = true;
+        let allNotes = document.querySelectorAll(".note-box");
+        allNotes.forEach(function(div){
+            div.classList.add("deleteNote");
+        });
+    }
+    else if(deleteValue){
+        deleteValue = false;
+        let allNotes = document.querySelectorAll(".note-box");
+        allNotes.forEach(function(div){
+            div.classList.remove("deleteNote");
+        });
+    }
+}
+
 
 //welcome screen
 let welcomeBox = document.getElementById("welcome-screen");
@@ -128,6 +176,8 @@ function newNote(){
     welcomeContainer.style.display = 'none';
     noteTop.classList.add("noteTextAreaShow");
     noteTextArea.classList.add("noteTextAreaShow");
+    noteTitle.value = "";
+    noteTextArea.value = "";
 }
 
 // date
@@ -151,7 +201,7 @@ updateDate();
 function newID(){
    let id;
    do{
-    Math.floor(1000 + Math.random() * 9000);
+    id = Math.floor(1000 + Math.random() * 9000);
    } while (notes.some(note => note.id === id));
    return id;
 
@@ -162,13 +212,6 @@ let noteTitle = document.getElementById("note-title");
 let newNoteButton = document.getElementById("new-note");
 function saveNote()
 {
-    var div = document.createElement("div");
-    var h = document.createElement("h1");
-    var button = document.createElement("button");
-
-    button.style.display = "none";
-    h.textContent = noteTitle.value;
-
     let userNote = {
         id:newID(),
         title: noteTitle.value,
@@ -177,13 +220,7 @@ function saveNote()
 
     notes.push(userNote);
     saveData();
-
-    div.classList.add("note-box");
-    h.classList.add("box-title");
-
-    div.appendChild(h);
-    div.appendChild(button);
-    document.getElementById("past-note").appendChild(div);
+    displayNote(userNote);
 
     welcomeContainer.style.display = 'flex';
     noteTop.style.display = 'none';
@@ -191,4 +228,9 @@ function saveNote()
     noteTitle.value = "";
 
 }
+
+loadData();
+
+
+
 
